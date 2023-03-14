@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bwastartup/auth"
 	"bwastartup/handler"
 	"bwastartup/user"
 	"fmt"
@@ -23,7 +24,10 @@ func main() {
 
 	userRepository := user.NewRepository(db)
 	userService := user.NewService(userRepository)
-	// userService.SaveAvatar(2,"images/1-profile.png")
+	authService := auth.NewService()
+
+	fmt.Println(authService.GenerateToken(1001))
+
 	userHandler := handler.NewUserHandler(userService)
 
 	router := gin.Default()
