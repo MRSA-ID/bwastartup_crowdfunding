@@ -154,7 +154,7 @@ func (h *userHandler) UploadAvatar(c *gin.Context){
 	}
 
 	// harusnya dapat dari JWT
-	userID := 1
+	userID := 2
 
 	_, err = h.userService.SaveAvatar(userID, path)
 
