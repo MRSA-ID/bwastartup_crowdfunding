@@ -9,7 +9,7 @@ type Transaction struct {
 	ID         int
 	CampaignID int
 	UserID     int
-	Amount     string
+	Amount     int
 	Status     string
 	Code       string
 	User 			 user.User
