@@ -1,6 +1,9 @@
 package transaction
 
-import "time"
+import (
+	"bwastartup/user"
+	"time"
+)
 
 type Transaction struct {
 	ID         int
@@ -9,6 +12,7 @@ type Transaction struct {
 	Amount     string
 	Status     string
 	Code       string
+	User 			 user.User
 	CreatedAt  time.Time
 	UpdateAt   time.Time
 }
