@@ -18,6 +18,8 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/multitemplate"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 	"gorm.io/driver/mysql"
@@ -48,15 +50,25 @@ func main() {
 	campaignHandler := handler.NewCampaignHandler(campaignService)
 	transactionHandler := handler.NewTransactionHandler(transactionService)
 	
-	userWebHandler := webHandler.NewUserHandler()
+	userWebHandler := webHandler.NewUserHandler(userService)
+	campaignWebHandler := webHandler.NewCampaignHandler(campaignService, userService)
+	transactionWebHandler := webHandler.NewTransactionHandler(transactionService)
+	sessionWebHandler := webHandler.NewSessionHandler(userService)
 
 	router := gin.Default()
+	router.SetTrustedProxies([]string{"192.168.100.2"})
 	router.Use(cors.Default())
 
-	// router.LoadHTMLGlob("web/templates/**/*")
+	cookieStore := cookie.NewStore([]byte(auth.SECRET_KEY))
+	router.Use(sessions.Sessions("mrsastartup", cookieStore))
+
+	router.LoadHTMLGlob("web/templates/**/*")
 	router.HTMLRender = loadTemplates("./web/templates")
 	
 	router.Static("/images", "./images")
+	router.Static("/css", "./web/assets/css")
+	router.Static("/js", "./web/assets/js")
+	router.Static("/image", "./web/assets/image")
 	api := router.Group("/api/v1")
 
 	api.POST("/users", userHandler.RegisterUser)
@@ -76,9 +88,31 @@ func main() {
 	api.POST("/transactions", authMiddleware(authService, userService), transactionHandler.CreateTransaction)
 	api.POST("/transactions/notification", transactionHandler.GetNotification)
 
-	router.GET("/users", userWebHandler.Index)
+	router.GET("/users", authAdminMiddleware(), userWebHandler.Index)
+	router.GET("/users/new", userWebHandler.New)
+	router.POST("/users", userWebHandler.Create)
 
-	router.Run(":8081")
+	router.GET("/users/edit/:id", userWebHandler.Edit)
+	router.POST("/users/update/:id", authAdminMiddleware(), userWebHandler.Update)
+
+	router.GET("/users/avatar/:id", authAdminMiddleware(), userWebHandler.NewAvatar)
+	router.POST("/users/avatar/:id", authAdminMiddleware(), userWebHandler.CreateAvatar)
+
+	router.GET("/campaigns", authAdminMiddleware(),campaignWebHandler.Index)
+	router.GET("/campaigns/new", authAdminMiddleware(),campaignWebHandler.New)
+	router.POST("/campaigns", authAdminMiddleware(),campaignWebHandler.Create)
+	router.GET("/campaigns/image/:id", authAdminMiddleware(),campaignWebHandler.NewImage)
+	router.POST("/campaigns/image/:id", authAdminMiddleware(),campaignWebHandler.CreateImage)
+	router.GET("/campaigns/edit/:id", authAdminMiddleware(),campaignWebHandler.Edit)
+	router.POST("/campaigns/update/:id", authAdminMiddleware(),campaignWebHandler.Update)
+	router.GET("/campaigns/show/:id", authAdminMiddleware(),campaignWebHandler.Show)
+	router.GET("/transactions", authAdminMiddleware(), transactionWebHandler.Index)
+
+	router.GET("/login",sessionWebHandler.New)
+	router.POST("/session",sessionWebHandler.Create)
+	router.GET("/logout",sessionWebHandler.Destroy)
+
+	log.Fatal(router.Run(":8080"))
 
 
 	// gambaran struktur flow:
@@ -146,6 +180,19 @@ func authMiddleware(authService auth.Service, userService user.Service) gin.Hand
 // kita ambil user_id
 // ambil user dari db berdasarkan user_id lewat service
 // kalau user ada set context isinya user
+
+func authAdminMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		session := sessions.Default(c)
+
+		// userID
+		userIDSession := session.Get("userID")
+		if userIDSession == nil {
+			c.Redirect(http.StatusFound, "/login")
+			return
+		}
+	}
+}
 
 func loadTemplates(templatesDir string) multitemplate.Renderer {
   r := multitemplate.NewRenderer()
