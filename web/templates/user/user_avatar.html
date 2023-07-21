@@ -1,0 +1,47 @@
+{{ define "content" }}
+<div class="page-breadcrumb">
+  <div class="row align-items-center">
+    <div class="col-6">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0 d-flex align-items-center">
+          <li class="breadcrumb-item">
+            <a href="/users" class="link"
+              ><i class="mdi mdi-home-outline fs-4"></i
+            ></a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Users
+          </li>
+        </ol>
+      </nav>
+      <h1 class="mb-0 fw-bold">Upload Avatar User</h1>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  {{ if .Error }}
+    <div class="alert alert-danger">
+      {{ .Error }}
+    </div>
+  {{ end }}
+  <div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <form action="/users/avatar/{{ .ID }}" class="form-horizontal form-material mx-2" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="file" name="avatar"
+                            class="form-control form-control-line" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-info text-white">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
+{{ end }}

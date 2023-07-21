@@ -1,0 +1,59 @@
+{{ define "content" }}
+<div class="page-breadcrumb">
+  <div class="row align-items-center">
+    <div class="col-6">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0 d-flex align-items-center">
+          <li class="breadcrumb-item">
+            <a href="/users" class="link"
+              ><i class="mdi mdi-home-outline fs-4"></i
+            ></a>
+          </li>
+          <li class="breadcrumb-item" aria-current="page">Campaign</li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Campaign Iamge
+          </li>
+        </ol>
+      </nav>
+      <h1 class="mb-0 fw-bold">Campaign Image</h1>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <!-- {{ if .Error }}
+  <div class="alert alert-danger">{{ .Error }}</div>
+  {{ end }} -->
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <form
+          action="/campaigns/image/{{.ID}}"
+          class="form-horizontal form-material mx-2"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <div class="form-group">
+            <label for="file" class="col-md-12">Campaign Image</label>
+            <div class="col-md-12">
+              <input
+                type="file"
+                class="form-control form-control-line"
+                name="file"
+                id="file"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <button type="submit" class="btn btn-info text-white">
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

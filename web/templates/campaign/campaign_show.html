@@ -1,0 +1,140 @@
+{{ define "content" }}
+<div class="page-breadcrumb">
+  <div class="row align-items-center">
+    <div class="col-6">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0 d-flex align-items-center">
+          <li class="breadcrumb-item">
+            <a href="/users" class="link"
+              ><i class="mdi mdi-home-outline fs-4"></i
+            ></a>
+          </li>
+          <li class="breadcrumb-item" aria-current="page">Campaign</li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Campaign Detail
+          </li>
+        </ol>
+      </nav>
+      <h1 class="mb-0 fw-bold">Campaign Detail</h1>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <form class="form-horizontal form-material mx-2">
+          <div class="form-group">
+            <label for="name" class="col-md-12">Name</label>
+            <div class="col-md-12">
+              <input
+                type="text"
+                placeholder="Enter name"
+                class="form-control form-control-line"
+                name="name"
+                id="name"
+                value="{{ .Name }}"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="short_description" class="col-md-12"
+              >Short Description</label
+            >
+            <div class="col-md-12">
+              <input
+                type="text"
+                placeholder="Enter short description"
+                class="form-control form-control-line"
+                name="short_description"
+                id="short_description"
+                value="{{ .ShortDescription }}"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description" class="col-md-12">Description</label>
+            <div class="col-md-12">
+              <textarea
+                type="text"
+                cols="30"
+                rows="10"
+                placeholder="Enter Description"
+                class="form-control form-control-line"
+                name="description"
+                id="description"
+                required
+              >
+                {{ .Description }}
+              </textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="goal_amount" class="col-md-12">Goal Amount</label>
+            <div class="col-md-12">
+              <input
+                type="text"
+                placeholder="Enter goal amount"
+                class="form-control form-control-line"
+                name="goal_amount"
+                id="goal_amount"
+                value="{{ .GoalAmountFormatIDR }}"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="perks" class="col-md-12">Perks</label>
+            <div class="col-md-12">
+              <input
+                type="text"
+                placeholder="Enter perks (comma separated)"
+                class="form-control form-control-line"
+                name="perks"
+                id="perks"
+                value="{{ .Perks }}"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="backer_count" class="col-md-12">Backer Count</label>
+            <div class="col-md-12">
+              <input
+                type="text"
+                class="form-control form-control-line"
+                name="backer_count"
+                id="backer_count"
+                value="{{ .BackerCount }}"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="current_amount" class="col-md-12">Current Amount</label>
+            <div class="col-md-12">
+              <input
+                type="text"
+                class="form-control form-control-line"
+                name="current_amount"
+                id="current_amount"
+                value="{{ .CurrentAmount }}"
+                required
+              />
+            </div>
+          </div>
+          <!-- <div class="form-group">
+            <div class="col-sm-12">
+              <button type="submit" class="btn btn-info text-white">
+                Submit
+              </button>
+            </div>
+          </div> -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

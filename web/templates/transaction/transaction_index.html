@@ -10,11 +10,11 @@
             ></a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            Users
+            transactions
           </li>
         </ol>
       </nav>
-      <h1 class="mb-0 fw-bold">Users</h1>
+      <h1 class="mb-0 fw-bold">transactions</h1>
     </div>
   </div>
 </div>
@@ -27,8 +27,8 @@
           <!-- title -->
           <div class="d-md-flex">
             <div>
-              <h4 class="card-title">List Of Users</h4>
-              <h5 class="card-subtitle">List Users Yang terdaftar</h5>
+              <h4 class="card-title">List Of transactions</h4>
+              <h5 class="card-subtitle">List transaction Yang terdaftar</h5>
             </div>
             <div class="ms-auto">
               <div class="dl">
@@ -40,56 +40,42 @@
                 </select>
               </div>
             </div>
-            <div class="ms-auto w-25">
-              <a href="/users/new" class="btn d-block w-100 mb-2 btn-info text-white">
-                <i class="mdi mdi-plus"></i>
-                New User
-              </a>
-            </div>
           </div>
           <!-- title -->
           <div class="table-responsive">
             <table class="table mb-0 table-hover align-middle text-nowrap">
               <thead>
                 <tr>
-                  <th class="border-top-0">Name</th>
-                  <th class="border-top-0">Email</th>
-                  <th class="border-top-0">Occupation</th>
-                  <th></th>
-                  <th></th>
+                  <th class="border-top-0">Campaign Name</th>
+                  <th class="border-top-0">Amount</th>
+                  <th class="border-top-0">Status</th>
                 </tr>
               </thead>
               <tbody>
-                {{ range .users }}
+                {{ range .transactions }}
                 <tr>
                   <td>
-                    <div class="d-flex align-items-center user-image">
-                      {{ if .AvatarFileName}}
-                        <div class="rounded-circle overflow-hidden m-r-10" style="width: 40px; height: 40px;  " >
-                          <img class="w-100 h-100" src="{{ .AvatarFileName }}" alt="avatar" style="object-fit: cover; object-position: center top;">
-                        </div>
-                      {{ else }}
-                        <div class="m-r-10">
-                          <div class="img-circle btn btn-circle d-flex align-items-center btn-info text-white justify-content-center text-uppercase"></div>
-                        </div>
-                      {{ end }}
-                      <div class="">
-                        <h4 class="m-b-0 font-16 client-name">{{ .Name }}</h4>
-                      </div>
-                    </div>
+                    <h4 class="m-b-0 font-16 client-name">
+                      {{ .Campaign.Name }}
+                    </h4>
                   </td>
-                  <td>{{ .Email }}</td>
-                  <td>{{ .Occupation }}</td>
+                  <td>{{ .AmountFormatIDR }}</td>
+                  <td>{{ .Status }}</td>
+                  <!-- <td>
+                    <a href="/campaigns/show/{{ .ID }}">
+                      <i class="mdi mdi-magnify"></i>
+                    </a>
+                  </td>
                   <td>
-                    <a href="/users/edit/{{ .ID }}">
+                    <a href="/campaigns/edit/{{ .ID }}">
                       <i class="mdi mdi-pencil"></i>
                     </a>
                   </td>
                   <td>
-                    <a href="/users/avatar/{{ .ID }}">
+                    <a href="/campaigns/image/{{ .ID }}">
                       <i class="mdi mdi-camera"></i>
                     </a>
-                  </td>
+                  </td> -->
                   <!-- <td>
                     <label class="badge bg-danger">Angular</label>
                   </td>
