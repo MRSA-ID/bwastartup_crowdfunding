@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"bwastartup/user"
+	"bwastartup/api/user"
 	"fmt"
 	"net/http"
 	"strconv"

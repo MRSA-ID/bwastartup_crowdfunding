@@ -1,4 +1,62 @@
 {{ define "content" }}
+<nav
+  class="navbar top-navbar navbar-expand-md navbar-light"
+  style="top: -55px; z-index: 99; position: absolute; right: 0"
+>
+  <div
+    class="navbar-collapse collapse"
+    id="navbarSupportedContent"
+    data-navbarbg="skin5"
+  >
+    <!-- ============================================================== -->
+    <!-- toggle and nav items -->
+    <!-- ============================================================== -->
+    <ul class="navbar-nav float-start me-auto"></ul>
+    <!-- ============================================================== -->
+    <!-- Right side toggle and nav items -->
+    <!-- ============================================================== -->
+    <ul class="navbar-nav float-end">
+      <!-- ============================================================== -->
+      <!-- User profile and search -->
+      <!-- ============================================================== -->
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="/image/users/avatar.jpg"
+            alt="user"
+            class="rounded-circle"
+            width="31"
+          />
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end user-dd animated"
+          aria-labelledby="navbarDropdown"
+        >
+          <a class="dropdown-item" href="/logout"
+            ><i class="ti-user m-r-5 m-l-5"></i> Logout</a
+          >
+          <!-- <a class="dropdown-item" href="javascript:void(0)"
+            ><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a
+          >
+          <a class="dropdown-item" href="javascript:void(0)"
+            ><i class="ti-email m-r-5 m-l-5"></i> Inbox</a
+          > -->
+        </ul>
+      </li>
+      <!-- ============================================================== -->
+      <!-- User profile and search -->
+      <!-- ============================================================== -->
+    </ul>
+  </div>
+</nav>
+
 <div class="page-breadcrumb">
   <div class="row align-items-center">
     <div class="col-6">
@@ -9,9 +67,7 @@
               ><i class="mdi mdi-home-outline fs-4"></i
             ></a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Users
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">Users</li>
         </ol>
       </nav>
       <h1 class="mb-0 fw-bold">Upload Avatar User</h1>
@@ -20,27 +76,36 @@
 </div>
 <div class="container-fluid">
   {{ if .Error }}
-    <div class="alert alert-danger">
-      {{ .Error }}
-    </div>
+  <div class="alert alert-danger">{{ .Error }}</div>
   {{ end }}
   <div class="col-12">
     <div class="card">
-        <div class="card-body">
-            <form action="/users/avatar/{{ .ID }}" class="form-horizontal form-material mx-2" method="POST" enctype="multipart/form-data">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <input type="file" name="avatar"
-                            class="form-control form-control-line" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <button type="submit" class="btn btn-info text-white">Update</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+      <div class="card-body">
+        <form
+          action="/users/avatar/{{ .ID }}"
+          class="form-horizontal form-material mx-2"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <div class="form-group">
+            <div class="col-md-12">
+              <input
+                type="file"
+                name="avatar"
+                class="form-control form-control-line"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <button type="submit" class="btn btn-info text-white">
+                Update
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>

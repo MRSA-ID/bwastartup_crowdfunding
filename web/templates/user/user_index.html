@@ -1,4 +1,62 @@
 {{ define "content" }}
+<nav
+  class="navbar top-navbar navbar-expand-md navbar-light"
+  style="top: -55px; z-index: 99; position: absolute; right: 0"
+>
+  <div
+    class="navbar-collapse collapse"
+    id="navbarSupportedContent"
+    data-navbarbg="skin5"
+  >
+    <!-- ============================================================== -->
+    <!-- toggle and nav items -->
+    <!-- ============================================================== -->
+    <ul class="navbar-nav float-start me-auto"></ul>
+    <!-- ============================================================== -->
+    <!-- Right side toggle and nav items -->
+    <!-- ============================================================== -->
+    <ul class="navbar-nav float-end">
+      <!-- ============================================================== -->
+      <!-- User profile and search -->
+      <!-- ============================================================== -->
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="/image/users/avatar.jpg"
+            alt="user"
+            class="rounded-circle"
+            width="31"
+          />
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end user-dd animated"
+          aria-labelledby="navbarDropdown"
+        >
+          <a class="dropdown-item" href="/logout"
+            ><i class="ti-user m-r-5 m-l-5"></i> Logout</a
+          >
+          <!-- <a class="dropdown-item" href="javascript:void(0)"
+            ><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a
+          >
+          <a class="dropdown-item" href="javascript:void(0)"
+            ><i class="ti-email m-r-5 m-l-5"></i> Inbox</a
+          > -->
+        </ul>
+      </li>
+      <!-- ============================================================== -->
+      <!-- User profile and search -->
+      <!-- ============================================================== -->
+    </ul>
+  </div>
+</nav>
+
 <div class="page-breadcrumb">
   <div class="row align-items-center">
     <div class="col-6">
@@ -9,9 +67,7 @@
               ><i class="mdi mdi-home-outline fs-4"></i
             ></a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            Users
-          </li>
+          <li class="breadcrumb-item active" aria-current="page">Users</li>
         </ol>
       </nav>
       <h1 class="mb-0 fw-bold">Users</h1>
@@ -41,7 +97,10 @@
               </div>
             </div>
             <div class="ms-auto w-25">
-              <a href="/users/new" class="btn d-block w-100 mb-2 btn-info text-white">
+              <a
+                href="/users/new"
+                class="btn d-block w-100 mb-2 btn-info text-white"
+              >
                 <i class="mdi mdi-plus"></i>
                 New User
               </a>
@@ -65,13 +124,23 @@
                   <td>
                     <div class="d-flex align-items-center user-image">
                       {{ if .AvatarFileName}}
-                        <div class="rounded-circle overflow-hidden m-r-10" style="width: 40px; height: 40px;  " >
-                          <img class="w-100 h-100" src="{{ .AvatarFileName }}" alt="avatar" style="object-fit: cover; object-position: center top;">
-                        </div>
+                      <div
+                        class="rounded-circle overflow-hidden m-r-10"
+                        style="width: 40px; height: 40px"
+                      >
+                        <img
+                          class="w-100 h-100"
+                          src="{{ .AvatarFileName }}"
+                          alt="avatar"
+                          style="object-fit: cover; object-position: center top"
+                        />
+                      </div>
                       {{ else }}
-                        <div class="m-r-10">
-                          <div class="img-circle btn btn-circle d-flex align-items-center btn-info text-white justify-content-center text-uppercase"></div>
-                        </div>
+                      <div class="m-r-10">
+                        <div
+                          class="img-circle btn btn-circle d-flex align-items-center btn-info text-white justify-content-center text-uppercase"
+                        ></div>
+                      </img>
                       {{ end }}
                       <div class="">
                         <h4 class="m-b-0 font-16 client-name">{{ .Name }}</h4>

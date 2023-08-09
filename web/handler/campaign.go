@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"bwastartup/campaign"
-	"bwastartup/user"
+	"bwastartup/api/campaign"
+	"bwastartup/api/user"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -20,7 +20,7 @@ func NewCampaignHandler(campaignService campaign.Service,userService user.Servic
 }
 
 func (h *campaignHandler) Index(c *gin.Context){
-	campaigns, err := h.campaignService.GetCampaigns(0)
+	campaigns, err := h.campaignService.GetCampaigns(0, "asc", "")
 
 	if err!= nil {
 		c.HTML(http.StatusInternalServerError, "error.html", nil)

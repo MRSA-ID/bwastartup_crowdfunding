@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"bwastartup/transaction"
+	"bwastartup/api/transaction"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
